@@ -2,6 +2,7 @@ import tw from "tailwind-styled-components"
 import Map from "../components/Map"
 import { SiUber } from "react-icons/si"
 import { FaUserCircle, FaCar, FaBiking, FaCalendarAlt } from "react-icons/fa"
+import Link from "next/link"
 const Index = () => {
     return (
         <Wrapper>
@@ -30,12 +31,15 @@ const Index = () => {
                 {/* ACTION BUTTONS */}
                 {/* ===================================== */}
                 <ActionButtons>
-                    <ActionButton>
-                        <ActionButtonImage>
-                            <FaCar size={34} />
-                        </ActionButtonImage>
-                        Ride
-                    </ActionButton>
+                    <Link href='/search' passHref>
+                        <ActionButton>
+                            <ActionButtonImage>
+                                <FaCar size={34} />
+                            </ActionButtonImage>
+                            Ride
+                        </ActionButton>
+                    </Link>
+
                     <ActionButton>
                         {" "}
                         <ActionButtonImage>
