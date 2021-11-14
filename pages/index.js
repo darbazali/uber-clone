@@ -94,7 +94,7 @@ const ActionButtonImage = tw.div`
 
 const InputButton = tw.div`
     h-20 bg-gray-200 text-2xl p-4
-    flex items-center mt-8
+    flex items-center mt-8 rounded
 `
 
 export default Index
