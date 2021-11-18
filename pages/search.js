@@ -1,3 +1,4 @@
+import { useState } from "react"
 import tw from "tailwind-styled-components"
 import {
     BsArrowLeft,
@@ -9,7 +10,26 @@ import { FaSquareFull } from "react-icons/fa"
 
 import { MdStars } from "react-icons/md"
 import Link from "next/link"
-const search = () => {
+import { accessToken } from "../components/Map"
+
+const Search = () => {
+    const [pickup, setPickup] = useState("")
+    const [dropoff, setDropoff] = useState("")
+
+    const getCoords = (location, callback) => {
+        fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?${new URLSearchParams(
+                { access_token: accessToken, limit: 1 }
+            )}`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                const points = data.features[0].center
+                callback(points)
+            })
+            .catch((err) => console.log(err))
+    }
+
     return (
         <Wrapper>
             {/* Button Container */}
@@ -30,8 +50,14 @@ const search = () => {
                 </FromToIcons>
 
                 <InputBoxes>
-                    <Input placeholder='Enter pickup location' />
-                    <Input placeholder='Where to?' />
+                    <Input
+                        onChange={(e) => getCoords(e.target.value, setPickup)}
+                        placeholder='Enter pickup location'
+                    />
+                    <Input
+                        onChange={(e) => getCoords(e.target.value, setDropoff)}
+                        placeholder='Where to?'
+                    />
                 </InputBoxes>
 
                 <PlusIcon>
@@ -45,7 +71,17 @@ const search = () => {
             </SavedPlaces>
 
             {/* Confirm Locations */}
-            <ConfirmLocation>Confirm Location</ConfirmLocation>
+            <Link
+                href={{
+                    pathname: "/confirm",
+                    query: {
+                        pickup: pickup,
+                        dropoff: dropoff,
+                    },
+                }}
+                passHref>
+                <ConfirmLocation>Confirm Location</ConfirmLocation>
+            </Link>
         </Wrapper>
     )
 }
@@ -87,4 +123,4 @@ const ConfirmLocation = tw.button`
     transition-colors duration-150 bg-blue-700 
     rounded-lg focus:shadow-outline hover:bg-blue-800
 `
-export default search
+export default Search
