@@ -24,7 +24,7 @@ const Index = () => {
                 router.push("/login")
             }
         })
-    }, [user, router])
+    }, [])
     return (
         <Wrapper>
             {/* map wrapper */}

@@ -14,7 +14,7 @@ const Login = () => {
                 router.push("/")
             }
         })
-    }, [router])
+    }, [])
     return (
         <Wrapper>
             <SiUber size={48} />
