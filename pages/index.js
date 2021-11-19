@@ -1,9 +1,30 @@
+import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { signOut, onAuthStateChanged } from "firebase/auth"
+import { auth } from "../firebase"
+
 import tw from "tailwind-styled-components"
 import Map from "../components/Map"
 import { SiUber } from "react-icons/si"
-import { FaUserCircle, FaCar, FaBiking, FaCalendarAlt } from "react-icons/fa"
+import { FaCar, FaBiking, FaCalendarAlt } from "react-icons/fa"
 import Link from "next/link"
 const Index = () => {
+    const [user, setUser] = useState(null)
+    const router = useRouter()
+
+    useEffect(() => {
+        return onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser({
+                    name: user.displayName,
+                    photoUrl: user.photoURL,
+                })
+            } else {
+                setUser(null)
+                router.push("/login")
+            }
+        })
+    }, [user, router])
     return (
         <Wrapper>
             {/* map wrapper */}
@@ -20,10 +41,11 @@ const Index = () => {
 
                     {/* Profile */}
                     <Profile>
-                        {/* Profile Name */}
-                        <Name>Darbaz Ali</Name>
-                        {/* Profile Photo */}
-                        <FaUserCircle size={34} />
+                        <Name>{user && user.name}</Name>
+                        <UserImage
+                            src={user && user.photoUrl}
+                            onClick={() => signOut(auth)}
+                        />
                     </Profile>
                 </Header>
 
@@ -79,7 +101,11 @@ const Profile = tw.div`
     flex flex-row items-center
 `
 const Name = tw.div`
-    mr-4 text-sm
+    mr-2 text-sm
+`
+
+const UserImage = tw.img`
+    h-8 w-auto cursor-pointer rounded-full
 `
 
 const ActionButtons = tw.div`

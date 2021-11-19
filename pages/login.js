@@ -9,12 +9,12 @@ const Login = () => {
     const router = useRouter()
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        return onAuthStateChanged(auth, (user) => {
             if (user) {
                 router.push("/")
             }
         })
-    }, [])
+    }, [router])
     return (
         <Wrapper>
             <SiUber size={48} />
