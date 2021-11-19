@@ -16,7 +16,6 @@ const Map = ({ pickupCoords, dropoffCoords }) => {
         })
 
         if (pickupCoords && dropoffCoords) {
-            console.log(pickupCoords, dropoffCoords)
             addToMap(map, pickupCoords)
             addToMap(map, dropoffCoords)
 

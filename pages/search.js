@@ -13,8 +13,8 @@ import Link from "next/link"
 import { accessToken } from "../components/Map"
 
 const Search = () => {
-    const [pickup, setPickup] = useState("")
-    const [dropoff, setDropoff] = useState("")
+    const [pickup, setPickup] = useState([0, 0])
+    const [dropoff, setDropoff] = useState([0, 0])
 
     const getCoords = (location, callback) => {
         fetch(
