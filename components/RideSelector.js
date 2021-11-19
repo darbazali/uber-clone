@@ -1,4 +1,5 @@
 import tw from "tailwind-styled-components"
+import { carList } from "../data/carList"
 
 const RideSelector = () => {
     return (
@@ -6,21 +7,25 @@ const RideSelector = () => {
             <Title>Choose a ride, or swipe to see more.</Title>
 
             <CarList>
-                <Car>
-                    <CarImage src='/assets/UberX.jpeg' />
-                    <CarDetails>
-                        <Service>UberX</Service>
-                        <Time>5 min away</Time>
-                    </CarDetails>
-                    <Price>$26.82</Price>
-                </Car>
+                {carList.map((car, idx) => (
+                    <Car key={idx}>
+                        <CarImageContainer>
+                            <CarImage src={car.imgUrl} />
+                        </CarImageContainer>
+                        <CarDetails>
+                            <Service>{car.service}</Service>
+                            <Time>5 min away</Time>
+                        </CarDetails>
+                        <Price>${20 * car.multipiler}</Price>
+                    </Car>
+                ))}
             </CarList>
         </Wrapper>
     )
 }
 
 const Wrapper = tw.div`
-    flex-1 
+    flex-1 flex flex-col overflow-y-scroll
 `
 
 const Title = tw.div`
@@ -31,10 +36,13 @@ const Title = tw.div`
     CAR
 =================================== */
 const CarList = tw.div`
-    flex flex-col
+    flex flex-col overflow-y-scroll
 `
 const Car = tw.div`
     flex flex-row py-4 items-center cursor-pointer
+`
+const CarImageContainer = tw.div`
+     w-28 flex-initial
 `
 const CarImage = tw.img`
     h-14 mr-4

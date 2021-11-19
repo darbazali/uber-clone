@@ -33,7 +33,7 @@ const Map = ({ pickupCoords, dropoffCoords }) => {
 }
 
 const Wrapper = tw.div`
-    flex-1
+    flex-1 h-1/2
 `
 
 export default Map

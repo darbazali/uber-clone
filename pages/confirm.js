@@ -14,21 +14,26 @@ const Confirm = () => {
                 {/* Ride Seelector */}
                 <RideSelector />
                 {/* Confirm Button */}
-                <ConfirmButtonContainer>Confirm UberX</ConfirmButtonContainer>
+
+                <ConfirmButtonContainer>
+                    <ConfirmButton>Confirm UberX</ConfirmButton>
+                </ConfirmButtonContainer>
             </RideContainer>
         </Wrapper>
     )
 }
 
 const Wrapper = tw.div`
-    flex h-screen flex-col
+    flex h-screen flex-col overflow-y-hidden
 `
 
 const RideContainer = tw.div`
-    flex-1 px-2 flex flex-col
+    flex-1 px-2 flex flex-col h-1/2
 `
+const ConfirmButtonContainer = tw.div`
 
-const ConfirmButtonContainer = tw.button`
+`
+const ConfirmButton = tw.button`
     w-full py-4 px-6 my-4 text-blue-100 
     transition-colors duration-150 bg-blue-700 
     rounded-lg focus:shadow-outline hover:bg-blue-800
